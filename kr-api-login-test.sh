@@ -7,13 +7,13 @@ set -x
 
 cd $(dirname $0)
 
-# KR_USER=${KR_USER:-username}
-# KR_PASSWORD=${KR_PASSWORD:-password}
-
 if [ -f ./.env ]; then
     echo "read .env"
     . ./.env
     echo "KR_USER='${KR_USER}'"
+else
+    KR_USER="username"
+    KR_PASSWORD="password"
 fi
 
 # curl -Ik https://krs.bz/rhd-itm/rpc
