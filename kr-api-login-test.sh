@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
+# クライゼルのapiでログインできるかどうかテストする。
+# SOAPなのでXMLを直接POSTで送っている
+
 set -e
 set -x
 
@@ -23,10 +26,11 @@ ENVELOPE=$(cat <<XML
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:enc="http://www.w3.org/2003/05/soap-encoding">
-  <env:Body><ns1:loginSession 
+  <env:Body>
+    <ns1:loginSession 
   	env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
-	<param0 xsi:type="xsd:string">${KR_USER}</param0>
-    <param1 xsi:type="xsd:string">${KR_PASSWORD}</param1>
+      <param0 xsi:type="xsd:string">${KR_USER}</param0>
+      <param1 xsi:type="xsd:string">${KR_PASSWORD}</param1>
     </ns1:loginSession>
   </env:Body>
 </env:Envelope>
