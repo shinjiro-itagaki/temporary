@@ -7,14 +7,13 @@ set -x
 
 cd $(dirname $0)
 
-KR_USER=${KR_USER:-username}
-KR_PASSWORD=${KR_PASSWORD:-password}
-
-set +x
+# KR_USER=${KR_USER:-username}
+# KR_PASSWORD=${KR_PASSWORD:-password}
 
 if [ -f ./.env ]; then
     echo "read .env"
     . ./.env
+    echo "KR_USER='${KR_USER}'"
 fi
 
 # curl -Ik https://krs.bz/rhd-itm/rpc
@@ -37,7 +36,11 @@ ENVELOPE=$(cat <<XML
 XML
 )
 
-echo $ENVELOPE | curl -X POST \
+# -v でリクエストとレスポンスのヘッダを表示
+# -dでPOSTのBODYを指定。
+# @xx.xmlでbodyの中身をファイルから取得
+# @-で標準入力から取得
+echo $ENVELOPE | curl -v -X POST \
   -H "Connection: Keep-Alive" \
   -H "Host: krs.bz" \
   -H "Cookie: Cookie-Check=1;" \

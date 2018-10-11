@@ -13,15 +13,15 @@
 // 52.194.74.165
 // 18.179.166.74
 
-require_once __DIR__.'/vendor/autoload.php';
-require_once "HTTP/Request2.php";
+require_once(__DIR__.'/vendor/autoload.php');
+require_once("HTTP/Request2.php");
 
 define("KR_RPC_SOAP_URI", 'https://krs.bz/rpc');
 define("KR_LOCATION", 'https://krs.bz/rhd-itm/rpc');
-define("KR_DBID", 276);
 define("ALL", 1);
 
 //===============
+define("KR_DBID",     getenv('KR_DBID')); // 276
 define("KR_USER",     getenv('KR_USER'));
 define("KR_PASSWORD", getenv('KR_PASSWORD'));
 //===============
@@ -37,7 +37,7 @@ $soap = new SoapClient(null,array(
 $soap->__setCookie("Cookie-Check", "1");
 
 try{
-    $soap->loginSession(KR_USER, KR_PASSWORD);
+#    $soap->loginSession(KR_USER, KR_PASSWORD);
     echo __LINE__;
     // ダウンロードファイル作成の一括処理を開始
     $batch_job_id = $soap->exportMembers(KR_DBID, ALL, ALL, TRUE);
