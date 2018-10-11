@@ -1,0 +1,10 @@
+.php-version
+.local
+.phpenv
+get-pip.py
+phpenv
+vendor
+bin
+.env
+lib
+zlib*
